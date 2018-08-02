@@ -53,14 +53,19 @@ CFRunLoopSourceRef 产生事件的来源，通常事件来源分为两种：sour
 CFRunLoopModeRef 是 RunLoop 的运行 mode。在 RunLoop 中，有以下几种 mode：
 
     * NSDefaultRunLoopMode(Cooca) kCFRunLoopDefaultMode (Core Foundation)
+
     都是默认的 Mode，APP 运行起来之后，主线程的 RunLoop 默认运行在该 Mode 下。
     * GSEventReceiveRunLoopMode(Cocoa)
+
     接受系统内部事件
     * UIInitializationRunLoopMode(Cocoa)
+
     APP 初始化的时候运行在该 Mode 下
     * UITrackingRunLoopMode(Cocoa)
+
     追踪触摸手势，确保界面刷新时不会卡顿，滑动 tableview，scrollview 等都运行在该模式下
     * NSRunLoopCommonModes(Cocoa) kCFRunLoopCommonModes (Core Foundation)
+
     commonModes 是特殊的模式
 
 上面的 Source/Timer/Observer 统一称作 Mode item。一个 item 可以被同时加在多个 mode 里。重复加入 item 只会有一次运行效果。如果 mode 里面没有 item，则 RunLoop 会直接退出。

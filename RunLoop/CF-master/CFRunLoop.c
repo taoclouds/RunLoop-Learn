@@ -1374,18 +1374,20 @@ static CFLock_t loopsLock = CFLockInit;
 // t==0 is a synonym for "main thread" that always works
 // 根据传入的线程 t 返回 RunLoop 对象
 CF_EXPORT CFRunLoopRef _CFRunLoopGet0(pthread_t t) {
+    // 如果  线程t 是 nil，则获取主线程
     if (pthread_equal(t, kNilPthreadT)) {
 	t = pthread_main_thread_np();
     }
     __CFLock(&loopsLock);
-    // 如果CFMutableDictionaryRef __CFRunLoops为空，则需要构建一个 字典
+    //  __CFRunLoops为一个字典，它存储着 RunLoop 与线程。存储方式是key 为线程，value 是 RunLoop
+    //  如果__CFRunLoops为空，则需要构建一个 字典来填充一下
     if (!__CFRunLoops) {
         __CFUnlock(&loopsLock);
         //创建一个字典
 	CFMutableDictionaryRef dict = CFDictionaryCreateMutable(kCFAllocatorSystemDefault, 0, NULL, &kCFTypeDictionaryValueCallBacks);
     // 创建一个主线程的 RunLoop
 	CFRunLoopRef mainLoop = __CFRunLoopCreate(pthread_main_thread_np());
-    // 将主线程的 mainloop 保存到字典中， key 是线程，value 是 RunLoop
+    // 将主线程的 mainloop 保存到字典中， key 是线程，value 是  main RunLoop
 	CFDictionarySetValue(dict, pthreadPointer(pthread_main_thread_np()), mainLoop);
     //写入到__CFRunLoops
 	if (!OSAtomicCompareAndSwapPtrBarrier(NULL, dict, (void * volatile *)&__CFRunLoops)) {
@@ -1395,7 +1397,7 @@ CF_EXPORT CFRunLoopRef _CFRunLoopGet0(pthread_t t) {
 	CFRelease(mainLoop);
         __CFLock(&loopsLock);
     }
-    // 在第一次进入时，不论传进来的是 主线程还是子线程，总是先去主线程的 RunLoop
+    // 在第一次进入时，不论传进来的是 主线程还是子线程，总是先取得主线程的 RunLoop
     // 从字典__CFRunLoops中获取传入线程t 的RunLoop
     CFRunLoopRef loop = (CFRunLoopRef)CFDictionaryGetValue(__CFRunLoops, pthreadPointer(t));
     __CFUnlock(&loopsLock);
@@ -1404,14 +1406,16 @@ CF_EXPORT CFRunLoopRef _CFRunLoopGet0(pthread_t t) {
         //根据线程t 创建一个 RunLoop
 	CFRunLoopRef newLoop = __CFRunLoopCreate(t);
         __CFLock(&loopsLock);
+        // 再取一遍难道不还是空吗？
 	loop = (CFRunLoopRef)CFDictionaryGetValue(__CFRunLoops, pthreadPointer(t));
 	if (!loop) {
-        // 把创建的RunLoop 放入__CFRunLoops，key 是线程
+        // 把创建的RunLoop newLoop 放入__CFRunLoops，key 是线程
 	    CFDictionarySetValue(__CFRunLoops, pthreadPointer(t), newLoop);
 	    loop = newLoop;
 	}
         // don't release run loops inside the loopsLock, because CFRunLoopDeallocate may end up taking it
         __CFUnlock(&loopsLock);
+        //释放创建的 newLoop
 	CFRelease(newLoop);
     }
     // 如果传入的线程就是当前线程
@@ -1609,16 +1613,20 @@ CF_EXPORT Boolean _CFRunLoop01(CFRunLoopRef rl, CFStringRef modeName) {
     return present;
 }
 
+// 根据 RunLoop rl 和 mode name 创建对于的 mode
 void CFRunLoopAddCommonMode(CFRunLoopRef rl, CFStringRef modeName) {
     CHECK_FOR_FORK();
     if (__CFRunLoopIsDeallocating(rl)) return;
     __CFRunLoopLock(rl);
+    // 判断 rl 的 commonModes 中是否存在 modeName 对应的 mode 了，如果有的话就什么也不做。
     if (!CFSetContainsValue(rl->_commonModes, modeName)) {
 	CFSetRef set = rl->_commonModeItems ? CFSetCreateCopy(kCFAllocatorSystemDefault, rl->_commonModeItems) : NULL;
+    // 添加modeName进 rl 的 CommonMode 里去
 	CFSetAddValue(rl->_commonModes, modeName);
 	if (NULL != set) {
 	    CFTypeRef context[2] = {rl, modeName};
 	    /* add all common-modes items to new mode */
+        //调用CFRunLoopAddSource/CFRunLoopAddObserver/CFRunLoopAddTimer的时候会调用
 	    CFSetApplyFunction(set, (__CFRunLoopAddItemsToCommonMode), (void *)context);
 	    CFRelease(set);
 	}
