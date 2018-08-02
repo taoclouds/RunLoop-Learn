@@ -2961,9 +2961,9 @@ void CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef rls, CFStringRef mod
     if (!__CFIsValid(rls)) return;
     Boolean doVer0Callout = false;
     __CFRunLoopLock(rl);
-    // 如果是 commonmode
+    // 如果是 commonModes
     if (modeName == kCFRunLoopCommonModes) {
-        //将 commonmode copy 一份赋值给 set
+        //将 commonmode copy 一份
 	CFSetRef set = rl->_commonModes ? CFSetCreateCopy(kCFAllocatorSystemDefault, rl->_commonModes) : NULL;
 	if (NULL == rl->_commonModeItems) {
         // rl里面的 item 为空，则初始化一个
