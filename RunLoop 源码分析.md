@@ -448,8 +448,11 @@ void CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef rls, CFStringRef mod
 在 RunLoop 的运行，在 Core Foundation 中可以通过以下两个 API 运行 RunLoop：
 * CFRunLoopRun(void) 在默认的 mode 下运行当前线程的 RunLoop。
 * CFRunLoopRunInMode(CFStringRef mode, CFTimeInterval seconds, Boolean returnAfterSourceHandled)   在指定的 mode 下运行当前线程的 RunLoop。
+
 对于 RunLoop，它的运行过程如下：
-[RunLoop 运行过程](https://github.com/taoclouds/RunLoop-Learn/blob/master/image/runloop%E8%BF%90%E8%A1%8C.png?raw=true)
+
+![RunLoop 运行过程](https://github.com/taoclouds/RunLoop-Learn/blob/master/image/runloop%E8%BF%90%E8%A1%8C.png?raw=true)
+
 下面通过源码来分析 RunLoop 的运行。
 首先是 CFRunLoopRun 和 CFRunLoopRunInMode。它们是在 RunLoop 运行时会调用的函数：
 ```
