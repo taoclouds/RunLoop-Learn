@@ -85,7 +85,7 @@ NSURLConnection 的工作过程：
 
 当开始网络传输时，我们可以看到 NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。
 
-![RunLoop与 URLConnection]()
+![RunLoop与 URLConnection](https://github.com/taoclouds/RunLoop-Learn/blob/master/image/URLconnection.png?raw=true)
 
 NSURLConnectionLoader 中的 RunLoop 通过一些基于 mach port 的Source 接收来自底层 CFSocket 的通知。当收到通知后，其会在合适的时机向 CFMultiplexerSource 等 Source0 发送通知，同时唤醒 Delegate 线程的 RunLoop 来让其处理这些通知。CFMultiplexerSource 会在 Delegate 线程的 RunLoop 对 Delegate 执行实际的回调。
 
