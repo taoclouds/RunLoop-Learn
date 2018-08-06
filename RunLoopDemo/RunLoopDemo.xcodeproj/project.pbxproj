@@ -17,9 +17,9 @@
 		3EE238AD21142F5C000FA3A0 /* RunLoopDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE238AC21142F5C000FA3A0 /* RunLoopDemoUITests.m */; };
 		3EE238C021144889000FA3A0 /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE238BF21144889000FA3A0 /* NextViewController.m */; };
 		3EE238C321144AD7000FA3A0 /* WThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE238C221144AD7000FA3A0 /* WThread.m */; };
-		3EE238C621145CD2000FA3A0 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE238C521145CD2000FA3A0 /* TableViewController.m */; };
 		3EE238C821146923000FA3A0 /* picture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3EE238C721146923000FA3A0 /* picture.jpg */; };
 		3EE238CB211471EE000FA3A0 /* StuckHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE238CA211471EE000FA3A0 /* StuckHelper.m */; };
+		3EEEAEE02118501100142ECB /* ThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEEAEDF2118501100142ECB /* ThreeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,11 +60,11 @@
 		3EE238BF21144889000FA3A0 /* NextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
 		3EE238C121144AD7000FA3A0 /* WThread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WThread.h; sourceTree = "<group>"; };
 		3EE238C221144AD7000FA3A0 /* WThread.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WThread.m; sourceTree = "<group>"; };
-		3EE238C421145CD2000FA3A0 /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		3EE238C521145CD2000FA3A0 /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		3EE238C721146923000FA3A0 /* picture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picture.jpg; sourceTree = "<group>"; };
 		3EE238C9211471EE000FA3A0 /* StuckHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StuckHelper.h; sourceTree = "<group>"; };
 		3EE238CA211471EE000FA3A0 /* StuckHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StuckHelper.m; sourceTree = "<group>"; };
+		3EEEAEDE2118501100142ECB /* ThreeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreeViewController.h; sourceTree = "<group>"; };
+		3EEEAEDF2118501100142ECB /* ThreeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +121,8 @@
 				3EE2388C21142F5B000FA3A0 /* ViewController.m */,
 				3EE238BE21144889000FA3A0 /* NextViewController.h */,
 				3EE238BF21144889000FA3A0 /* NextViewController.m */,
-				3EE238C421145CD2000FA3A0 /* TableViewController.h */,
-				3EE238C521145CD2000FA3A0 /* TableViewController.m */,
+				3EEEAEDE2118501100142ECB /* ThreeViewController.h */,
+				3EEEAEDF2118501100142ECB /* ThreeViewController.m */,
 				3EE238C9211471EE000FA3A0 /* StuckHelper.h */,
 				3EE238CA211471EE000FA3A0 /* StuckHelper.m */,
 				3EE238C121144AD7000FA3A0 /* WThread.h */,
@@ -287,7 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EE2388D21142F5B000FA3A0 /* ViewController.m in Sources */,
-				3EE238C621145CD2000FA3A0 /* TableViewController.m in Sources */,
+				3EEEAEE02118501100142ECB /* ThreeViewController.m in Sources */,
 				3EE238C321144AD7000FA3A0 /* WThread.m in Sources */,
 				3EE238C021144889000FA3A0 /* NextViewController.m in Sources */,
 				3EE238CB211471EE000FA3A0 /* StuckHelper.m in Sources */,

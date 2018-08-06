@@ -8,7 +8,7 @@
 
 #import "NextViewController.h"
 #import "WThread.h"
-#import "TableViewController.h"
+#import "ThreeViewController.h"
 
 @interface NextViewController ()
 
@@ -43,7 +43,7 @@
 }
 
 - (void)nextVC {
-    TableViewController *tableVC = [[TableViewController alloc] init];
+    ThreeViewController *tableVC = [[ThreeViewController alloc] init];
     tableVC.view.backgroundColor = [UIColor whiteColor];
     [self presentViewController:tableVC animated:YES completion:nil];
 }
